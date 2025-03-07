@@ -39,3 +39,14 @@ def train_one_epoch_vit(model, dataloader, optimizer, criterion, device):
     avg_loss = running_loss / total
     accuracy = correct / total
     return avg_loss, accuracy
+
+# -------------------------------
+# 1. Train Vision Transformer on CEDAR Dataset
+# -------------------------------
+print("Training ViT on CEDAR Dataset")
+model_vit_cedar = ViTSignature(num_classes=2).to(device)
+optimizer_vit_cedar = optim.Adam(model_vit_cedar.parameters(), lr=0.0001)
+
+for epoch in range(num_epochs):
+    loss_vit_cedar, acc_vit_cedar = train_one_epoch_vit(model_vit_cedar, cedar_train_loader, optimizer_vit_cedar, criterion, device)
+    print(f"Epoch {epoch+1:2d} - CEDAR ViT Loss: {loss_vit_cedar:.4f}, Accuracy: {acc_vit_cedar*100:.2f}%")
