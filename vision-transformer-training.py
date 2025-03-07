@@ -72,3 +72,14 @@ optimizer_vit_sigcomp = optim.Adam(model_vit_sigcomp.parameters(), lr=0.0001)
 for epoch in range(num_epochs):
     loss_vit_sigcomp, acc_vit_sigcomp = train_one_epoch_vit(model_vit_sigcomp, sigcomp_train_loader, optimizer_vit_sigcomp, criterion, device)
     print(f"Epoch {epoch+1:2d} - SIGCOMP ViT Loss: {loss_vit_sigcomp:.4f}, Accuracy: {acc_vit_sigcomp*100:.2f}%")
+
+# -------------------------------
+# 4. Train Vision Transformer on MCYT Dataset
+# -------------------------------
+print("\nTraining ViT on MCYT Dataset")
+model_vit_mcyt = ViTSignature(num_classes=2).to(device)
+optimizer_vit_mcyt = optim.Adam(model_vit_mcyt.parameters(), lr=0.0001)
+
+for epoch in range(num_epochs):
+    loss_vit_mcyt, acc_vit_mcyt = train_one_epoch_vit(model_vit_mcyt, mcyt_train_loader, optimizer_vit_mcyt, criterion, device)
+    print(f"Epoch {epoch+1:2d} - MCYT ViT Loss: {loss_vit_mcyt:.4f}, Accuracy: {acc_vit_mcyt*100:.2f}%")
