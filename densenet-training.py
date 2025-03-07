@@ -27,3 +27,10 @@ optimizer_densenet_gpds = optim.Adam(model_densenet_gpds.parameters(), lr=0.001)
 for epoch in range(num_epochs):
     loss_dense_gpds, acc_dense_gpds = train_one_epoch(model_densenet_gpds, gpds_train_loader, optimizer_densenet_gpds, criterion, device)
     print(f"Epoch {epoch+1:2d} - GPDS DenseNet Loss: {loss_dense_gpds:.4f}, Accuracy: {acc_dense_gpds*100:.2f}%")
+
+print("\nTraining DenseNetSignature on MCYT Dataset")
+model_densenet_mcyt = DenseNetSignature(num_classes=2).to(device)
+optimizer_densenet_mcyt = optim.Adam(model_densenet_mcyt.parameters(), lr=0.001)
+for epoch in range(num_epochs):
+    loss_dense_mcyt, acc_dense_mcyt = train_one_epoch(model_densenet_mcyt, mcyt_train_loader, optimizer_densenet_mcyt, criterion, device)
+    print(f"Epoch {epoch+1:2d} - MCYT DenseNet Loss: {loss_dense_mcyt:.4f}, Accuracy: {acc_dense_mcyt*100:.2f}%")
