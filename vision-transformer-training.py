@@ -61,4 +61,14 @@ optimizer_vit_gpds = optim.Adam(model_vit_gpds.parameters(), lr=0.0001)
 for epoch in range(num_epochs):
     loss_vit_gpds, acc_vit_gpds = train_one_epoch_vit(model_vit_gpds, gpds_train_loader, optimizer_vit_gpds, criterion, device)
     print(f"Epoch {epoch+1:2d} - GPDS ViT Loss: {loss_vit_gpds:.4f}, Accuracy: {acc_vit_gpds*100:.2f}%")
-    
+
+# -------------------------------
+# 3. Train Vision Transformer on SIGCOMP Dataset
+# -------------------------------
+print("\nTraining ViT on SIGCOMP Dataset")
+model_vit_sigcomp = ViTSignature(num_classes=2).to(device)
+optimizer_vit_sigcomp = optim.Adam(model_vit_sigcomp.parameters(), lr=0.0001)
+
+for epoch in range(num_epochs):
+    loss_vit_sigcomp, acc_vit_sigcomp = train_one_epoch_vit(model_vit_sigcomp, sigcomp_train_loader, optimizer_vit_sigcomp, criterion, device)
+    print(f"Epoch {epoch+1:2d} - SIGCOMP ViT Loss: {loss_vit_sigcomp:.4f}, Accuracy: {acc_vit_sigcomp*100:.2f}%")
