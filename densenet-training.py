@@ -10,3 +10,12 @@ class DenseNetSignature(nn.Module):
         
     def forward(self, x):
         return self.densenet(x)
+
+# Example training loop for DenseNetSignature on CEDAR dataset:
+print("\nTraining DenseNetSignature on CEDAR Dataset")
+model_densenet_cedar = DenseNetSignature(num_classes=2).to(device)
+optimizer_densenet_cedar = optim.Adam(model_densenet_cedar.parameters(), lr=0.001)
+
+for epoch in range(num_epochs):
+    loss_dense, acc_dense = train_one_epoch(model_densenet_cedar, cedar_train_loader, optimizer_densenet_cedar, criterion, device)
+    print(f"Epoch {epoch+1:2d} - CEDAR DenseNet Loss: {loss_dense:.4f}, Accuracy: {acc_dense*100:.2f}%")
