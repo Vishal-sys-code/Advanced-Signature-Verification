@@ -50,3 +50,15 @@ optimizer_vit_cedar = optim.Adam(model_vit_cedar.parameters(), lr=0.0001)
 for epoch in range(num_epochs):
     loss_vit_cedar, acc_vit_cedar = train_one_epoch_vit(model_vit_cedar, cedar_train_loader, optimizer_vit_cedar, criterion, device)
     print(f"Epoch {epoch+1:2d} - CEDAR ViT Loss: {loss_vit_cedar:.4f}, Accuracy: {acc_vit_cedar*100:.2f}%")
+
+# -------------------------------
+# 2. Train Vision Transformer on GPDS Dataset
+# -------------------------------
+print("\nTraining ViT on GPDS Dataset")
+model_vit_gpds = ViTSignature(num_classes=2).to(device)
+optimizer_vit_gpds = optim.Adam(model_vit_gpds.parameters(), lr=0.0001)
+
+for epoch in range(num_epochs):
+    loss_vit_gpds, acc_vit_gpds = train_one_epoch_vit(model_vit_gpds, gpds_train_loader, optimizer_vit_gpds, criterion, device)
+    print(f"Epoch {epoch+1:2d} - GPDS ViT Loss: {loss_vit_gpds:.4f}, Accuracy: {acc_vit_gpds*100:.2f}%")
+    
